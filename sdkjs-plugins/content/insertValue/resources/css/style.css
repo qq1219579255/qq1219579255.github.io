@@ -1,0 +1,28 @@
+:root{
+    --color-primary:#00b5b9;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.vertica-line{
+    width: 2px;
+    height: 15px;
+    margin-right: 6px;
+    background-color: var(--color-primary);
+    vertical-align: middle;
+}
+
+.vertica-line + span{
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.el-collapse-item__header{
+    border-bottom: none;
+}
+
+.el-collapse-item__wrap{
+    border-bottom: none;
+}
+
+
