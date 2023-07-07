@@ -36,7 +36,7 @@
 		<div>
 			<el-input placeholder="请输入关键字搜索" v-model="searchText" clearable>
 			</el-input>
-			<el-collapse v-model="activeNames" @change="handleChange">
+			<el-collapse v-model="activeNames" @change="handleClick">
 				<el-collapse-item name="1">
 					<template slot="title">
 						<i></i><span>基本信息</span>
@@ -204,6 +204,7 @@
 		},
 		methods: {
 			handleClick() {
+				console.log('测试点击')
 				// 处理按钮点击事件
 			}
 		}

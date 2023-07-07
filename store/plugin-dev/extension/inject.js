@@ -1,5 +1,5 @@
 (function(window, undefined) {
-	var URL_TO_PLUGIN = "https://github.com/qq1219579255/qq1219579255.github.io/tree/master/sdkjs-plugins/content/insertValue";
+	var URL_TO_PLUGIN = "https://qq1219579255.github.io/sdkjs-plugins/content/insertValue/";
 
 	var xhrObj = new XMLHttpRequest();
 	xhrObj.open('GET', URL_TO_PLUGIN + "config.json", false);
