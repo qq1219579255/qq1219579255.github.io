@@ -57,10 +57,10 @@
 						<i class="vertica-line"></i><span>{{ item.label }}</span>
 					</template>
 					<div class="list">
-						<div class="list-card" v-for="v in item.fieldList" :key="v.id" @click="Add(v.name)">
-							<template v-if="item.isEnable === 'Y'">
+						<div v-for="v in item.fieldList" :key="v.id">
+							<div class="list-card" v-if="item.isEnable === 'Y'" @click="Add(v.name)">
 								{{ v.name }}
-							</template>
+							</div>
 						</div>
 					</div>
 				</el-collapse-item>
@@ -247,37 +247,37 @@
 
 			},
 			// 获取下拉列表内容
-			getOptions() {
-				let xhr = new XMLHttpRequest()
-				xhr.open("POST", "https://17h25506n5.goho.co/common/template/corporealList", true)
-				xhr.setRequestHeader("Content-Type", "application/json")
-				xhr.onreadystatechange = () => {
-					if (xhr.readyState === 4 && xhr.status === 200) {
-						let result = JSON.parse(xhr.responseText)
-						// 处理响应数据
-						if (+result.code === 1) {
-							this.options = result.data
-						} else {
-							this.$message.error(result.msg)
-						}
-					}
-				}
-				xhr.send()
-			},
 			// getOptions() {
-			// 	let fn = (result) => {
-			// 		if (+result.code === 1) {
-			// 			this.options = result.data
-			// 		} else {
-			// 			this.$message.error(result.msg)
+			// 	let xhr = new XMLHttpRequest()
+			// 	xhr.open("POST", "https://17h25506n5.goho.co/common/template/corporealList", true)
+			// 	xhr.setRequestHeader("Content-Type", "application/json")
+			// 	xhr.onreadystatechange = () => {
+			// 		if (xhr.readyState === 4 && xhr.status === 200) {
+			// 			let result = JSON.parse(xhr.responseText)
+			// 			// 处理响应数据
+			// 			if (+result.code === 1) {
+			// 				this.options = result.data
+			// 			} else {
+			// 				this.$message.error(result.msg)
+			// 			}
 			// 		}
 			// 	}
-			// 	this.requestXHR({
-			// 		method: "POST",
-			// 		url: "https://17h25506n5.goho.co/common/template/corporealList",
-			// 		callback: fn,
-			// 	})
+			// 	xhr.send()
 			// },
+			getOptions() {
+				let fn = (result) => {
+					if (+result.code === 1) {
+						this.options = result.data
+					} else {
+						this.$message.error(result.msg)
+					}
+				}
+				this.requestXHR({
+					method: "POST",
+					url: "https://17h25506n5.goho.co/common/template/corporealList",
+					callback: fn,
+				})
+			},
 			// 下拉选中某项加载对应变量列表
 			onChange(e) {
 				let fn = (result) => {

@@ -1,14 +1,18 @@
-:root{
-    --color-primary:#00b5b9;
+:root {
+    --color-primary: #00b5b9;
     background-color: #fff;
     padding: 20px;
 }
 
-body{
+body {
     background-color: #fff;
 }
 
-.vertica-line{
+* {
+    box-sizing: border-box;
+}
+
+.vertica-line {
     width: 2px;
     height: 15px;
     margin-right: 6px;
@@ -16,7 +20,7 @@ body{
     vertical-align: middle;
 }
 
-.vertica-line + span{
+.vertica-line + span {
     font-size: 14px;
     vertical-align: middle;
 }
