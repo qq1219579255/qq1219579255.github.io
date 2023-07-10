@@ -4,6 +4,10 @@
     padding: 20px;
 }
 
+body{
+    background-color: #fff;
+}
+
 .vertica-line{
     width: 2px;
     height: 15px;

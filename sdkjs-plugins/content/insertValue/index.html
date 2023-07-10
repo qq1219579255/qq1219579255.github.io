@@ -226,10 +226,12 @@
 				let xhr = new XMLHttpRequest();
 				xhr.open('POST', 'https://17h25506n5.goho.co/common/template/corporealList', true);
 				xhr.setRequestHeader('Content-Type', 'application/json');
-				xhr.onreadystatechange = function() {
+				xhr.onreadystatechange = ()=> {
+					console.log(xhr)
 					if (xhr.readyState === 4 && xhr.status === 200) {
 						// 处理响应数据
 						var data = JSON.parse(xhr.responseText);
+						this.options = data.data
 						// ...
 					}
 				};
@@ -239,6 +241,7 @@
 		created() {
 			console.log('这是当前window的地址对象',window.location);
 			this.getOptions()
+
 		},
 	});
 </script>
