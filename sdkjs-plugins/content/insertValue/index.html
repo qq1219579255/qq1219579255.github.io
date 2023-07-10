@@ -90,11 +90,6 @@
 						let result = JSON.parse(xhr.responseText)
 						// 处理响应数据
 						callback.call(this, result)
-						if (+result.code === 1) {
-							this.options = result.data
-						} else {
-							this.$message.error(result.msg)
-						}
 					}
 				}
 				let jsonData = JSON.stringify(data)
@@ -145,7 +140,6 @@
 		created() {
 			console.log('这是当前window的地址对象',window.location);
 			this.getOptions()
-
 		},
 	});
 </script>
