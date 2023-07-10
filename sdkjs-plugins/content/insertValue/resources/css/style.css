@@ -21,12 +21,31 @@ body{
     vertical-align: middle;
 }
 
-.el-collapse-item__header{
+.el-collapse-item__header {
     border-bottom: none;
 }
 
-.el-collapse-item__wrap{
+.el-collapse-item__wrap {
     border-bottom: none;
 }
 
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.list-card {
+    width: calc((100% - 12px) / 2);
+    height: 32px;
+    line-height: 32px;
+    border-radius: 4px;
+    border: 1px solid #D9D9D9;
+    cursor: pointer;
+}
+
+.list-card:hover {
+    color: #00B5B9;
+    border: 1px solid #00B5B9;
+}
 
