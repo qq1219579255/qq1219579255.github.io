@@ -120,9 +120,7 @@
 						console.log("发送了消息")
 						console.log('这是el',this.$el)
 						console.log('这是win',window)
-						// let contentWindow = this.$el.querySelector("iframe").contentWindow
-						window.frames.postMessage({ id: this.currentId },'*')
-						sessionStorage.setItem('entityId',e)
+						window.contentWindow.postMessage({ id: this.currentId },'http://localhost:8001')
 					} else {
 						this.$message.error(result.msg)
 					}
