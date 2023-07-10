@@ -16,28 +16,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>数据变量</title>
+	<meta charset="UTF-8">
+	<title>数据变量</title>
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js"></script>
 	<link rel="stylesheet" href="resources/theme-chalk/index.css">
-	<!-- <script src="https://unpkg.com/element-ui/lib/index.js"></script> -->
-	<script src="resources/lib/index.js"></script>
+	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+	<!-- <script src="resources/lib/index.js"></script> -->
 	<script type="text/javascript" src="https://onlyoffice.github.io/sdkjs-plugins/v1/plugins.js"></script>
-    <script type="text/javascript" src="https://onlyoffice.github.io/sdkjs-plugins/v1/plugins-ui.js"></script>
-    <link rel="stylesheet" href="https://onlyoffice.github.io/sdkjs-plugins/v1/plugins.css">
-    <script type="text/javascript" src="scripts/code.js"></script>
+	<script type="text/javascript" src="https://onlyoffice.github.io/sdkjs-plugins/v1/plugins-ui.js"></script>
+	<link rel="stylesheet" href="https://onlyoffice.github.io/sdkjs-plugins/v1/plugins.css">
+	<script type="text/javascript" src="scripts/code.js"></script>
 	<link rel="stylesheet" href="resources/css/style.css">
 
 	<style>
-		td { font-weight: bold }
-		a {color: red;cursor: pointer;margin-left: 16px;}
+		td {
+			font-weight: bold
+		}
+
+		a {
+			color: red;
+			cursor: pointer;
+			margin-left: 16px;
+		}
 	</style>
 </head>
 <body style="width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;">
 	<div id="app">
 		<div>
-			<el-input placeholder="请输入关键字搜索" v-model="searchText" clearable>
-			</el-input>
+			<el-select placeholder="请选择关键字检索" v-model="searchText" clearable>
+				<el-option
+					v-for="item in options"
+					:key="item.id"
+					:label="item.name"
+					:value="item.id">
+				</el-option>
+			</el-select>
 			<el-collapse v-model="activeNames" @change="handleClick">
 				<el-collapse-item name="1">
 					<template slot="title">
@@ -195,21 +208,37 @@
 	<br/>
 </body>
 <script>
-	// Vue.use(ElementUI)
 	new Vue({
 		el: '#app',
 		data() {
 			return {
-				searchText: '',
-				activeNames: ['1']
+				searchText: "",
+				activeNames: ["1"],
+				options: [],
 			}
 		},
 		methods: {
 			handleClick() {
-				console.log('测试点击')
+				console.log("测试点击")
 				// 处理按钮点击事件
-			}
-		}
+			},
+			getOptions() {
+				let xhr = new XMLHttpRequest();
+				xhr.open('POST', 'http://local.lsqke.com/common/template/corporealList', true);
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState === 4 && xhr.status === 200) {
+						// 处理响应数据
+						var data = JSON.parse(xhr.responseText);
+						// ...
+					}
+				};
+			},
+		},
+		created() {
+			console.log('这是当前window的地址对象',window.location);
+			console.log('环境变量',process.env.VUE_APP_SERVER_PROXY);
+			this.getOptions()
+		},
 	});
 </script>
 </html>
