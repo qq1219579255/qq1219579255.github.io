@@ -57,11 +57,11 @@
 						<i class="vertica-line"></i><span>{{ item.label }}</span>
 					</template>
 					<div class="list">
-						<div v-for="v in item.fieldList" :key="v.id">
+						<template v-for="v in item.fieldList" :key="v.id">
 							<div class="list-card" v-if="v.isEnable === 'Y'" @click="Add(v.name)">
 								{{ v.name }}
 							</div>
-						</div>
+						</template>
 					</div>
 				</el-collapse-item>
 			</el-collapse>
@@ -247,23 +247,6 @@
 
 			},
 			// 获取下拉列表内容
-			// getOptions() {
-			// 	let xhr = new XMLHttpRequest()
-			// 	xhr.open("POST", "https://17h25506n5.goho.co/common/template/corporealList", true)
-			// 	xhr.setRequestHeader("Content-Type", "application/json")
-			// 	xhr.onreadystatechange = () => {
-			// 		if (xhr.readyState === 4 && xhr.status === 200) {
-			// 			let result = JSON.parse(xhr.responseText)
-			// 			// 处理响应数据
-			// 			if (+result.code === 1) {
-			// 				this.options = result.data
-			// 			} else {
-			// 				this.$message.error(result.msg)
-			// 			}
-			// 		}
-			// 	}
-			// 	xhr.send()
-			// },
 			getOptions() {
 				let fn = (result) => {
 					if (+result.code === 1) {
