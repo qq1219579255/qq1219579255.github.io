@@ -117,8 +117,16 @@
 					if (+result.code === 1) {
 						this.list = result.data
 						this.activeNames = result.data.map((item) => item.label)
-						console.log('发送了消息')
-						window.postMessage({ id: this.currentId }, "*")
+						console.log("发送了消息")
+						let arr = location.search.split("&")
+						let originUrl
+						for (const val of arr) {
+							if (val.split("=")[0] === "parentOrigin") {
+								originUrl = val.split("=")[1]
+								break
+							}
+						}
+						window.postMessage({ id: this.currentId }, originUrl)
 					} else {
 						this.$message.error(result.msg)
 					}
