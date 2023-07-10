@@ -46,6 +46,10 @@ body {
     border-radius: 4px;
     border: 1px solid #D9D9D9;
     cursor: pointer;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .list-card:hover {
