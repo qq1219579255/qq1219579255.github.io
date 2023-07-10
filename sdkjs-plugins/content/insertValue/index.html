@@ -126,7 +126,8 @@
 								break
 							}
 						}
-						window.postMessage({ id: this.currentId }, originUrl)
+						let contentWindow = this.$el.querySelector("iframe").contentWindow
+						contentWindow.postMessage({ id: this.currentId }, originUrl)
 					} else {
 						this.$message.error(result.msg)
 					}
