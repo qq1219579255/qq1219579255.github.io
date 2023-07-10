@@ -113,11 +113,12 @@
 			},
 			// 下拉选中某项加载对应变量列表
 			onChange(e) {
-				// this.$message.info('切换实体会导致之前的变量失效')
 				let fn = (result) => {
 					if (+result.code === 1) {
 						this.list = result.data
 						this.activeNames = result.data.map((item) => item.label)
+						console.log('发送了消息')
+						window.postMessage({ id: this.currentId }, "*")
 					} else {
 						this.$message.error(result.msg)
 					}
