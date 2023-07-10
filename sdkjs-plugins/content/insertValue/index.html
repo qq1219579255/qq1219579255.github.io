@@ -122,6 +122,7 @@
 						console.log('这是win',window)
 						// let contentWindow = this.$el.querySelector("iframe").contentWindow
 						window.frames.postMessage({ id: this.currentId },'*')
+						sessionStorage.setItem('entityId',e)
 					} else {
 						this.$message.error(result.msg)
 					}
