@@ -118,19 +118,10 @@
 						this.list = result.data
 						this.activeNames = result.data.map((item) => item.label)
 						console.log("发送了消息")
-						let arr = location.search.split("&")
-						let originUrl
-						for (const val of arr) {
-							if (val.split("=")[0] === "parentOrigin") {
-								originUrl = val.split("=")[1]
-								break
-							}
-						}
-						console.log(originUrl)
 						console.log('这是el',this.$el)
 						console.log('这是win',window)
 						// let contentWindow = this.$el.querySelector("iframe").contentWindow
-						window.frames.postMessage({ id: this.currentId }, originUrl)
+						window.frames.postMessage({ id: this.currentId },'*')
 					} else {
 						this.$message.error(result.msg)
 					}
