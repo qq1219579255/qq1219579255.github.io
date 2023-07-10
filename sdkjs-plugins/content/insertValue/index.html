@@ -43,7 +43,7 @@
 <body style="width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;">
 	<div id="app">
 		<div>
-			<el-select placeholder="请选择关键字检索" v-model="searchText" clearable style="width: 100%;" @change="onChange">
+			<el-select placeholder="请选择关键字检索" v-model="searchText" clearable style="width: 100%;margin-bottom: 24px;" @change="onChange">
 				<el-option
 					v-for="item in options"
 					:key="item.id"
@@ -57,7 +57,7 @@
 						<i class="vertica-line"></i><span>{{ item.label }}</span>
 					</template>
 					<div class="list">
-						<div class="list-card" v-for="v in item.fieldList" :key="v.id">
+						<div class="list-card" v-for="v in item.fieldList" :key="v.id" @click="Add(v.name)">
 							<template v-if="item.isEnable === 'Y'">
 								{{ v.name }}
 							</template>
