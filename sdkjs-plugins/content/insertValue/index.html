@@ -126,8 +126,10 @@
 								break
 							}
 						}
-						let contentWindow = this.$el.querySelector("iframe").contentWindow
-						contentWindow.postMessage({ id: this.currentId }, originUrl)
+						console.log('这是el',this.$el)
+						console.log('这是win',window)
+						// let contentWindow = this.$el.querySelector("iframe").contentWindow
+						// contentWindow.postMessage({ id: this.currentId }, originUrl)
 					} else {
 						this.$message.error(result.msg)
 					}
