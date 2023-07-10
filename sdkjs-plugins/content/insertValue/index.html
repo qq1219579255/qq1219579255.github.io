@@ -243,7 +243,8 @@
 					}
 				}
 				let jsonData = JSON.stringify(data)
-				xhr.send(jsonData)
+				jsonData ? xhr.send(jsonData) : xhr.send()
+
 			},
 			// 获取下拉列表内容
 			getOptions() {
