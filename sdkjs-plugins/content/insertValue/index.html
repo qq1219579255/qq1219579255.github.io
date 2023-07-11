@@ -120,7 +120,7 @@
 						console.log("发送了消息")
 						console.log('这是el',this.$el)
 						console.log('这是win',window)
-						window.parent.postMessage(JSON.stringify({ id: this.currentId }),'http://localhost:8001')
+						window.top.postMessage(JSON.stringify({ id: this.currentId }),'*')
 					} else {
 						this.$message.error(result.msg)
 					}
