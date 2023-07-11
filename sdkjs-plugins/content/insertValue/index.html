@@ -142,6 +142,7 @@
 		},
 		created() {
 			console.log('这是当前window的地址对象',window.location);
+			window.top.postMessage('求求了成功发送吧','*')
 			this.getOptions()
 		},
 	});
