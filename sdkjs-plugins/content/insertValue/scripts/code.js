@@ -27,9 +27,8 @@
 		var sScript = "var oDocument = Api.GetDocument();";
         sScript += "var oParagraph = Api.CreateParagraph();";
         sScript += "oParagraph.AddText(\'" + field_type + "\');";
-        sScript += "oDocument.InsertContent([oParagraph]);";
+        sScript += "oDocument.InsertContent([oParagraph],false, {KeepTextOnly: true});";
         sScript += "var oPreviousParagraph = oParagraph.GetPrevious();";
-        sScript += `console.log(oPreviousParagraph)`;
         sScript += "var oStyle = oPreviousParagraph.GetStyle();";
         sScript += "oParagraph.SetStyle(oStyle);";
         window.Asc.plugin.info.recalculate = true;
