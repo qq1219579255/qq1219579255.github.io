@@ -29,6 +29,7 @@
         sScript += "oParagraph.AddText(\'" + field_type + "\');";
         sScript += "oDocument.InsertContent([oParagraph]);";
         sScript += "var oPreviousParagraph = oParagraph.GetPrevious();";
+        sScript += `console.log(oPreviousParagraph)`;
         sScript += "var oStyle = oPreviousParagraph.GetStyle();";
         sScript += "oParagraph.SetStyle(oStyle);";
         window.Asc.plugin.info.recalculate = true;
