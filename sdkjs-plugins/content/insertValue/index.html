@@ -93,7 +93,8 @@
 					}
 				}
 				let jsonData = JSON.stringify(data)
-				jsonData ? xhr.send(jsonData) : xhr.send()
+				// jsonData ? xhr.send(jsonData) : xhr.send()
+				xhr.send(jsonData)
 
 			},
 			// 获取下拉列表内容
@@ -117,10 +118,7 @@
 					if (+result.code === 1) {
 						this.list = result.data
 						this.activeNames = result.data.map((item) => item.label)
-						console.log("发送了消息")
-						console.log('这是el',this.$el)
-						console.log('这是win',window)
-						window.top.postMessage(JSON.stringify({ id: this.currentId }),'*')
+						window.top.postMessage({ id: this.currentId }, "*")
 					} else {
 						this.$message.error(result.msg)
 					}
@@ -141,8 +139,6 @@
 			},
 		},
 		created() {
-			console.log('这是当前window的地址对象',window.location);
-			window.top.postMessage('求求了成功发送吧','*')
 			this.getOptions()
 		},
 	});
