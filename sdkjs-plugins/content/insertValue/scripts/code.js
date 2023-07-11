@@ -16,18 +16,21 @@
  *
  */
 (function(window, undefined){
-	
+
 	var isInit = false;
 	window.Add = function(field_type)
 	{
 		if (!isInit)
 			return;
-		
+
 		// serialize command as text
 		var sScript = "var oDocument = Api.GetDocument();";
         sScript += "var oParagraph = Api.CreateParagraph();";
         sScript += "oParagraph.AddText(\'" + field_type + "\');";
         sScript += "oDocument.InsertContent([oParagraph]);";
+        sScript += "var oPreviousParagraph = oParagraph.GetPrevious();";
+        sScript += "var oStyle = oPreviousParagraph.GetStyle();";
+        sScript += "oParagraph.SetStyle(oStyle);";
         window.Asc.plugin.info.recalculate = true;
         window.Asc.plugin.executeCommand("command", sScript);
 	};
