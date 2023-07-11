@@ -43,7 +43,7 @@
 <body style="width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;">
 	<div id="app">
 		<div>
-			<el-select placeholder="请选择关键字检索" v-model="currentId" style="width: 100%;margin-bottom: 24px;" @change="onChange">
+			<el-select filterable placeholder="请选择关键字检索" v-model="currentId" style="width: 100%;margin-bottom: 24px;" @change="onChange">
 				<el-option
 					v-for="item in options"
 					:key="item.id"
@@ -51,7 +51,7 @@
 					:value="item.id">
 				</el-option>
 			</el-select>
-			<el-collapse v-model="activeNames">
+			<el-collapse v-model="activeNames" v-if="list.length">
 				<el-collapse-item :name="item.label" v-for="(item,index) in list" :key="index">
 					<template slot="title">
 						<i class="vertica-line"></i><span>{{ item.label }}</span>
@@ -65,6 +65,7 @@
 					</div>
 				</el-collapse-item>
 			</el-collapse>
+			<el-empty description="暂无实体内容" v-else></el-empty>
 		</div>
 	</div>
 </body>
