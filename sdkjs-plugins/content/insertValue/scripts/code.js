@@ -20,25 +20,7 @@
 	var isInit = false
 	var editorType = ""
 	const command = function (text) {
-		switch (editorType) {
-			case "word": {
-				return (text) => {
-					const oDocument = Api.GetDocument()
-					const oParagraph = Api.CreateParagraph()
-					oParagraph.AddText(text)
-					oDocument.InsertContent([oParagraph], false, { KeepTextOnly: true })
-				}
-			}
-			case "cell": {
-				return (text) => {
-					// var oWorksheet = Api.GetActiveSheet()
-					Api.GetSelection().SetValue(text)
-				}
-			}
-			case "slide": {
-				break
-			}
-		}
+
 	}
 	window.Add = function (field_type) {
 		if (!isInit)
@@ -51,7 +33,25 @@
 		sScript += "oDocument.InsertContent([oParagraph], false, {KeepTextOnly: true});" */
 		window.Asc.plugin.info.recalculate = true
 		// window.Asc.plugin.executeCommand("command", sScript)
-		window.Asc.plugin.callCommand(command(field_type), false, true)
+		let command = () => {
+			switch (editorType) {
+				case "word":
+					const oDocument = Api.GetDocument()
+					const oParagraph = Api.CreateParagraph()
+					oParagraph.AddText(field_type)
+					oDocument.InsertContent([oParagraph], false, { KeepTextOnly: true })
+					break
+				case "cell":
+					// var oWorksheet = Api.GetActiveSheet()
+					Api.GetSelection().SetValue(field_type)
+					break
+				case "slide": {
+					break
+				}
+			}
+		}
+
+		window.Asc.plugin.callCommand(command, false, true)
 
 	}
 	window.Mark = function () {
