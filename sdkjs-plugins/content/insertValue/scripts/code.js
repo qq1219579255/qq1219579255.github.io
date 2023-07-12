@@ -56,6 +56,7 @@
 	}
 
 	window.Asc.plugin.init = function () {
+		console.log('执行了init方法')
 		isInit = true
 		editorType = this.info.editorType
 	}
