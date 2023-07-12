@@ -30,6 +30,7 @@
 		sScript += "oDocument.InsertContent([oParagraph], false, {KeepTextOnly: true});" */
 		window.Asc.plugin.info.recalculate = true
 		// window.Asc.plugin.executeCommand("command", sScript)
+		console.log(window.Asc.plugin.info.editorType)
 		let command = () => {
 			switch (window.Asc.plugin.info.editorType) {
 				case "word":
@@ -56,7 +57,7 @@
 	}
 
 	window.Asc.plugin.init = function () {
-		console.log('执行了init方法')
+		console.log('执行了init方法',window.Asc.plugin.info.editorType)
 		isInit = true
 		editorType = this.info.editorType
 	}
