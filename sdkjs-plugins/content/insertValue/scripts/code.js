@@ -17,34 +17,55 @@
  */
 (function(window, undefined){
 
-	var isInit = false;
-	window.Add = function(field_type)
-	{
+	var isInit = false
+	var editorType = ""
+	const command = function (text) {
+		switch (editorType) {
+			case "word": {
+				return () => {
+					const oDocument = Api.GetDocument()
+					const oParagraph = Api.CreateParagraph()
+					oParagraph.AddText(text)
+					oDocument.InsertContent([oParagraph], false, { KeepTextOnly: true })
+				}
+			}
+			case "cell": {
+				return () => {
+					// var oWorksheet = Api.GetActiveSheet()
+					Api.GetSelection().SetValue(text)
+				}
+			}
+			case "slide": {
+				break
+			}
+		}
+	}
+	window.Add = function (field_type) {
 		if (!isInit)
-			return;
+			return
 
 		// serialize command as text
-		var sScript = "var oDocument = Api.GetDocument();";
-        sScript += "var oParagraph = Api.CreateParagraph();";
-        sScript += "oParagraph.AddText(\'" + field_type + "\');";
-        sScript += "oDocument.InsertContent([oParagraph], false, {KeepTextOnly: true});";
-        window.Asc.plugin.info.recalculate = true;
-        window.Asc.plugin.executeCommand("command", sScript);
-	};
-	window.Mark = function()
-	{
-		return window.Add('${DynamicTable}');
-	};
+		/* var sScript = "var oDocument = Api.GetDocument();"
+		sScript += "var oParagraph = Api.CreateParagraph();"
+		sScript += "oParagraph.AddText(\'" + field_type + "\');"
+		sScript += "oDocument.InsertContent([oParagraph], false, {KeepTextOnly: true});" */
+		window.Asc.plugin.info.recalculate = true
+		// window.Asc.plugin.executeCommand("command", sScript)
+		window.Asc.plugin.callCommand(command, false, true)
 
-    window.Asc.plugin.init = function()
-    {
-        isInit = true;
-    };
+	}
+	window.Mark = function () {
+		return window.Add("${DynamicTable}")
+	}
 
-    window.Asc.plugin.button = function(id)
-    {
+	window.Asc.plugin.init = function () {
+		isInit = true
+		editorType = this.info.editorType
+	}
+
+	window.Asc.plugin.button = function (id) {
 		if (-1 == id)
-			this.executeCommand("close", "");
-    };
+			this.executeCommand("close", "")
+	}
 
 })(window, undefined);
