@@ -19,9 +19,6 @@
 
 	var isInit = false
 	var editorType = ""
-	const command = function (text) {
-
-	}
 	window.Add = function (field_type) {
 		if (!isInit)
 			return
@@ -34,7 +31,7 @@
 		window.Asc.plugin.info.recalculate = true
 		// window.Asc.plugin.executeCommand("command", sScript)
 		let command = () => {
-			switch (editorType) {
+			switch (window.Asc.plugin.info.editorType) {
 				case "word":
 					const oDocument = Api.GetDocument()
 					const oParagraph = Api.CreateParagraph()
