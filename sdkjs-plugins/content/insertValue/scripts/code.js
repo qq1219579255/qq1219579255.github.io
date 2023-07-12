@@ -22,7 +22,7 @@
 	const command = function (text) {
 		switch (editorType) {
 			case "word": {
-				return () => {
+				return (text) => {
 					const oDocument = Api.GetDocument()
 					const oParagraph = Api.CreateParagraph()
 					oParagraph.AddText(text)
@@ -30,7 +30,7 @@
 				}
 			}
 			case "cell": {
-				return () => {
+				return (text) => {
 					// var oWorksheet = Api.GetActiveSheet()
 					Api.GetSelection().SetValue(text)
 				}

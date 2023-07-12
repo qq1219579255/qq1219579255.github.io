@@ -1,10 +1,10 @@
 {
-    "name" : "插值",
+    "name" : "变量",
     "guid" : "asc.{6B6715E5-A558-4F70-8058-40704CD659CF}",
 
     "variations" : [
         {
-            "description" : "插值",
+            "description" : "变量",
             "url"         : "index.html",
 
             "icons"           : ["resources/img/icon.png", "resources/img/icon@2x.png"],
