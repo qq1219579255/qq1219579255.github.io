@@ -18,30 +18,32 @@
 (function(window, undefined){
 
 	var isInit = false
-	var editorType = ""
+
+
 	window.Add = function (field_type) {
 		if (!isInit)
 			return
 
-		// serialize command as text
+		Asc.scope.text = field_type;
+
 		/* var sScript = "var oDocument = Api.GetDocument();"
 		sScript += "var oParagraph = Api.CreateParagraph();"
 		sScript += "oParagraph.AddText(\'" + field_type + "\');"
 		sScript += "oDocument.InsertContent([oParagraph], false, {KeepTextOnly: true});" */
 		window.Asc.plugin.info.recalculate = true
 		// window.Asc.plugin.executeCommand("command", sScript)
-		console.log(window.Asc.plugin.info.editorType)
 		let command = () => {
-			switch (window.Asc.plugin.info.editorType) {
+			switch (Asc.scope.editorType) {
 				case "word":
 					const oDocument = Api.GetDocument()
 					const oParagraph = Api.CreateParagraph()
-					oParagraph.AddText(field_type)
+
+					oParagraph.AddText(Asc.scope.text)
 					oDocument.InsertContent([oParagraph], false, { KeepTextOnly: true })
 					break
 				case "cell":
 					// var oWorksheet = Api.GetActiveSheet()
-					Api.GetSelection().SetValue(field_type)
+					Api.GetSelection().SetValue(Asc.scope.text)
 					break
 				case "slide": {
 					break
@@ -57,9 +59,8 @@
 	}
 
 	window.Asc.plugin.init = function () {
-		console.log('执行了init方法',window.Asc.plugin.info.editorType)
 		isInit = true
-		editorType = this.info.editorType
+		Asc.scope.editorType = this.info.editorType
 	}
 
 	window.Asc.plugin.button = function (id) {
