@@ -21,7 +21,6 @@
 	<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
 	<link rel="stylesheet" href="resources/theme-chalk/index.css">
 	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
-	<!-- <script src="resources/lib/index.js"></script> -->
 	<script type="text/javascript" src="https://onlyoffice.github.io/sdkjs-plugins/v1/plugins.js"></script>
 	<script type="text/javascript" src="https://onlyoffice.github.io/sdkjs-plugins/v1/plugins-ui.js"></script>
 	<link rel="stylesheet" href="https://onlyoffice.github.io/sdkjs-plugins/v1/plugins.css">
@@ -65,7 +64,7 @@
 					</div>
 				</el-collapse-item>
 			</el-collapse>
-			<el-empty description="暂无实体内容" v-else @click.native="Add('这是测试插入数据')"></el-empty>
+			<el-empty description="暂无实体内容" v-else></el-empty>
 		</div>
 	</div>
 </body>

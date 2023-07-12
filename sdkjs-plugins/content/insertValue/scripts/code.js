@@ -46,6 +46,7 @@
 					Api.GetSelection().SetValue(Asc.scope.text)
 					break
 				case "slide": {
+
 					break
 				}
 			}
