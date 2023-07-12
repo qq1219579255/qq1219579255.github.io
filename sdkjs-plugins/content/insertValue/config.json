@@ -4,12 +4,12 @@
 
     "variations" : [
         {
-            "description" : "invoices",
+            "description" : "插值",
             "url"         : "index.html",
 
             "icons"           : ["resources/img/icon.png", "resources/img/icon@2x.png"],
             "isViewer"        : false,
-            "EditorsSupport"  : ["word"],
+            "EditorsSupport"  : [ "word", "cell", "slide" ],
 
             "isVisual"        : true,
             "isModal"         : false,
