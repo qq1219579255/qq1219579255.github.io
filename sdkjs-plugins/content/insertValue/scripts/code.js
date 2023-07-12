@@ -51,7 +51,7 @@
 		sScript += "oDocument.InsertContent([oParagraph], false, {KeepTextOnly: true});" */
 		window.Asc.plugin.info.recalculate = true
 		// window.Asc.plugin.executeCommand("command", sScript)
-		window.Asc.plugin.callCommand(command, false, true)
+		window.Asc.plugin.callCommand(command(field_type), false, true)
 
 	}
 	window.Mark = function () {
