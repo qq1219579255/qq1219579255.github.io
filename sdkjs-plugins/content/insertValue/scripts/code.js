@@ -62,6 +62,8 @@
 	window.Asc.plugin.init = function () {
 		isInit = true
 		Asc.scope.editorType = this.info.editorType
+
+		console.log('插件执行了！！！！！！！')
 	}
 
 	window.Asc.plugin.button = function (id) {
