@@ -64,6 +64,7 @@
 		Asc.scope.editorType = this.info.editorType
 
 		console.log('插件执行了！！！！！！！')
+		window.top.postMessage({ event: 'onInsertValuePluginInit' }, "*")
 	}
 
 	window.Asc.plugin.button = function (id) {
