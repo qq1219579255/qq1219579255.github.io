@@ -128,8 +128,13 @@
 				Add(str)
 			},
 		},
-		created() {
+		mounted() {
 			this.getOptions()
+			window.addEventListener("message", (e) => {
+				if (e.data.event === "init") {
+					this.currentId = e.data.entityId
+				}
+			})
 		},
 		computed: {
 			baseUrl() {
