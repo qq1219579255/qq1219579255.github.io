@@ -96,8 +96,8 @@
 				}
 				this.requestXHR({
 					method: "POST",
-					// url: "https://17h25506n5.goho.co/common/template/corporealList",
-					url: this.baseUrl + "/common/template/corporealList",
+					url: "https://17h25506n5.goho.co/common/template/corporealList",
+					// url: this.baseUrl + "/common/template/corporealList",
 					callback: fn,
 				})
 			},
@@ -107,15 +107,15 @@
 					if (+result.code === 1) {
 						this.list = result.data
 						this.activeNames = result.data.map((item) => item.label)
-						window.top.postMessage({ id: this.currentId }, "*")
+						window.top.postMessage({ event: "onInsertValueChange", id: this.currentId }, "*")
 					} else {
 						this.$message.error(result.msg)
 					}
 				}
 				this.requestXHR({
 					method: "POST",
-					// url: "https://17h25506n5.goho.co/common/template/corporealFieldList",
-					url: this.baseUrl + "/common/template/corporealFieldList",
+					url: "https://17h25506n5.goho.co/common/template/corporealFieldList",
+					// url: this.baseUrl + "/common/template/corporealFieldList",
 					data: {
 						entityId: e,
 					},
