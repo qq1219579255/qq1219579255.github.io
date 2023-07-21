@@ -130,9 +130,11 @@
 		},
 		mounted() {
 			this.getOptions()
+			// 初次打开插件时回显传入内容
 			window.addEventListener("message", (e) => {
 				if (e.data.event === "init") {
 					this.currentId = e.data.entityId
+					this.currentId && this.onChange(this.currentId)
 				}
 			})
 		},
