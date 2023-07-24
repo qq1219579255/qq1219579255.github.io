@@ -68,59 +68,9 @@
 			}
 		},
 		methods: {
-			// XMLHttpRequest请求简易封装
-			requestXHR({ method = "POST", url, callback, data }) {
-				let xhr = new XMLHttpRequest()
-				xhr.open(method, url, true)
-				xhr.setRequestHeader("Content-Type", "application/json")
-				xhr.onreadystatechange = () => {
-					if (xhr.readyState === 4 && xhr.status === 200) {
-						let result = JSON.parse(xhr.responseText)
-						// 处理响应数据
-						callback.call(this, result)
-					}
-				}
-				let jsonData = JSON.stringify(data)
-				// jsonData ? xhr.send(jsonData) : xhr.send()
-				xhr.send(jsonData)
-
-			},
-			// 获取下拉列表内容
-			getOptions() {
-				let fn = (result) => {
-					if (+result.code === 1) {
-						this.options = result.data
-					} else {
-						this.$message.error(result.msg)
-					}
-				}
-				this.requestXHR({
-					method: "POST",
-					url: "https://17h25506n5.goho.co/common/template/corporealList",
-					// url: this.baseUrl + "/common/template/corporealList",
-					callback: fn,
-				})
-			},
 			// 下拉选中某项加载对应变量列表
 			onChange(e) {
-				let fn = (result) => {
-					if (+result.code === 1) {
-						this.list = result.data
-						this.activeNames = result.data.map((item) => item.label)
-						window.top.postMessage({ event: "onInsertValueChange", id: this.currentId }, "*")
-					} else {
-						this.$message.error(result.msg)
-					}
-				}
-				this.requestXHR({
-					method: "POST",
-					url: "https://17h25506n5.goho.co/common/template/corporealFieldList",
-					// url: this.baseUrl + "/common/template/corporealFieldList",
-					data: {
-						entityId: e,
-					},
-					callback: fn,
-				})
+				window.top.postMessage({ event: "onInsertValueChange", id: e }, "*")
 			},
 			// 点击插入变量
 			handleClick(data, parentData) {
@@ -129,32 +79,18 @@
 			},
 		},
 		mounted() {
-			this.getOptions()
-			// 初次打开插件时回显传入内容
+			// 打开插件时回显传入内容绑定父窗口事件，接收父窗口传递过来的内容（解决跨域问题）
 			window.addEventListener("message", (e) => {
 				if (e.data.event === "init") {
+					this.options = e.data.list
 					this.currentId = e.data.entityId
 					this.currentId && this.onChange(this.currentId)
 				}
-			})
-		},
-		computed: {
-			baseUrl() {
-				let topWindowUrl = window.top.location.href
-				if (topWindowUrl.includes("localhost") || topWindowUrl.includes("local.lsqke")) {
-					// 当前是开发环境
-					return "http://local.lsqke.com"
-				} else if (topWindowUrl.includes("dev.lsqke")) {
-					// 当前是测试环境
-					return "http://dev.lsqke.com"
-				} else if (topWindowUrl.includes("pre.lsqke")) {
-					// 当前是预生产环境
-					return "http://pre.lsqke.com"
-				} else {
-					// 当前是生产环境
-					return "http://lsqke.com"
+				if (e.data.event === "change") {
+					this.list = e.data.list
+					this.activeNames = e.data.list.map((item) => item.label)
 				}
-			},
+			})
 		},
 	});
 </script>
