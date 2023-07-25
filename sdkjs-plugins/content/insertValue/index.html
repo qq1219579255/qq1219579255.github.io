@@ -74,7 +74,7 @@
 			},
 			// 点击插入变量
 			handleClick(data, parentData) {
-				let str = `#${ parentData.label }-${ data.name }#`
+				let str = `#${ this.$refs.selectRef.query }-${ data.name }#`
 				Add(str)
 			},
 		},
