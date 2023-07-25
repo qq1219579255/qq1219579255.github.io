@@ -2,6 +2,8 @@
     --color-primary: #00b5b9;
     background-color: #fff;
     padding: 20px;
+    height: 100%;
+    overflow: auto;
 }
 
 body {
