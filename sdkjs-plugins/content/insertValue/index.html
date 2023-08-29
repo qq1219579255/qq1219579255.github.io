@@ -30,6 +30,10 @@
 <body style="width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;">
 	<div id="app">
 		<div>
+			<el-radio-group v-model="label" @input="radioChange">
+				<el-radio-button label="1">变量</el-radio-button>
+				<el-radio-button label="2">表单</el-radio-button>
+			</el-radio-group>
 			<el-select ref="selectRef" popper-class="popper-class" filterable placeholder="请选择变量实体对象" v-model="currentId" style="width: 100%;margin-bottom: 24px;" @change="onChange">
 				<el-option
 					v-for="item in options"
@@ -39,13 +43,13 @@
 				</el-option>
 			</el-select>
 			<el-collapse v-model="activeNames" v-if="list.length">
-				<el-collapse-item :name="item.label" v-for="(item,index) in list" :key="index">
+				<el-collapse-item :name="item[labelKey[label]]" v-for="(item,index) in list" :key="index">
 					<template slot="title">
-						<i class="vertica-line"></i><span>{{ item.label }}</span>
+						<i class="vertica-line"></i><span>{{ item[labelKey[label]] }}</span>
 					</template>
 					<div class="list">
-						<template v-for="v in item.fieldList" :key="v.id">
-							<div class="list-card" v-if="v.isEnable === 'Y'" @click="handleClick(v,item)">
+						<template v-for="v in item[listKey[label]]" :key="v.id">
+							<div class="list-card" @click="handleClick(v,item)">
 								{{ v.name }}
 							</div>
 						</template>
@@ -61,20 +65,37 @@
 		el: '#app',
 		data() {
 			return {
+				label: "1",
 				currentId: "",
 				activeNames: [],
 				options: [],
 				list: [],
+				labelKey: {
+					"1": "label",
+					"2": "libraryName",
+				},
+				listKey: {
+					"1": "fieldList",
+					"2": "configueList",
+				},
 			}
 		},
 		methods: {
 			// 下拉选中某项加载对应变量列表
 			onChange(e) {
-				window.top.postMessage({ event: "onInsertValueChange", id: e }, "*")
+				window.top.postMessage({ event: "onInsertValueChange", label: this.label, id: e }, "*")
+			},
+			// 切换实体与表单时清空当前的列表内容
+			radioChange(e) {
+				this.currentId = ""
+				this.list = []
+				this.activeNames = []
 			},
 			// 点击插入变量
 			handleClick(data, parentData) {
-				let str = `#${ this.$refs.selectRef.query }-${ data.name }#`
+				let str
+				this.label === "1" && (str = `#${ this.$refs.selectRef.query }-${ data.name }#`)
+				this.label === "2" && (str = `$${ this.$refs.selectRef.query }-${ data.name }$`)
 				Add(str)
 			},
 		},
@@ -88,7 +109,8 @@
 				}
 				if (e.data.event === "change") {
 					this.list = e.data.list
-					this.activeNames = e.data.list.map((item) => item.label)
+					console.log(this.list)
+					this.activeNames = e.data.list.map((item) => item[this.labelKey[this.label]])
 				}
 			})
 			let width = this.$refs.selectRef.$el.offsetWidth

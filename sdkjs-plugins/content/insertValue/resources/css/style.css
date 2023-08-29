@@ -35,6 +35,19 @@ body {
     border-bottom: none;
 }
 
+.el-radio-group{
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.el-radio-button{
+    width: 50%;
+}
+
+.el-radio-button__inner{
+    width: 100%;
+}
+
 .list {
     display: flex;
     flex-wrap: wrap;
