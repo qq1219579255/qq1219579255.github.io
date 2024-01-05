@@ -30,10 +30,10 @@
 <body style="width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;">
 	<div id="app">
 		<div>
-			<el-radio-group v-model="label" @input="radioChange">
+			<!-- <el-radio-group v-model="label" @input="radioChange">
 				<el-radio-button label="1">变量</el-radio-button>
 				<el-radio-button label="2">表单</el-radio-button>
-			</el-radio-group>
+			</el-radio-group> -->
 			<el-select ref="selectRef" popper-class="popper-class" filterable placeholder="请选择变量实体对象" v-model="currentId" style="width: 100%;margin-bottom: 24px;" @change="onChange">
 				<el-option
 					v-for="item in options"
@@ -42,7 +42,7 @@
 					:value="item.id">
 				</el-option>
 			</el-select>
-			<el-collapse v-model="activeNames" v-if="list.length">
+			<!-- <el-collapse v-model="activeNames" v-if="list.length">
 				<el-collapse-item :name="item[labelKey[label]]" v-for="(item,index) in list" :key="index">
 					<template slot="title">
 						<i class="vertica-line"></i><span>{{ item[labelKey[label]] }}</span>
@@ -55,7 +55,14 @@
 						</template>
 					</div>
 				</el-collapse-item>
-			</el-collapse>
+			</el-collapse> -->
+			<div class="list">
+				<template v-for="v in item[listKey[label]]" :key="v.id">
+					<div class="list-card" @click="handleClick(v,item)">
+						{{ v.name }}
+					</div>
+				</template>
+			</div>
 			<el-empty description="暂无实体内容" v-else></el-empty>
 		</div>
 	</div>
@@ -65,7 +72,7 @@
 		el: '#app',
 		data() {
 			return {
-				label: "1",
+				label: "2",
 				currentId: "",
 				activeNames: [],
 				options: [],
