@@ -37,9 +37,9 @@
 			<el-select ref="selectRef" popper-class="popper-class" filterable placeholder="请选择变量实体对象" v-model="currentId" style="width: 100%;margin-bottom: 24px;" @change="onChange">
 				<el-option
 					v-for="item in options"
-					:key="item.id"
-					:label="item.name"
-					:value="item.id">
+					:key="item.groupId"
+					:label="item.groupName"
+					:value="item.groupId">
 				</el-option>
 			</el-select>
 			<!-- <el-collapse v-model="activeNames" v-if="list.length">
@@ -57,11 +57,9 @@
 				</el-collapse-item>
 			</el-collapse> -->
 			<div class="list">
-				<template v-for="v in item[listKey[label]]" :key="v.id">
-					<div class="list-card" @click="handleClick(v,item)">
-						{{ v.name }}
-					</div>
-				</template>
+				<div class="list-card" v-for="v in list" :key="v.groupId" @click="handleClick(v)">
+					{{ v.title }}
+				</div>
 			</div>
 			<el-empty description="暂无实体内容" v-else></el-empty>
 		</div>
@@ -119,7 +117,7 @@
 				}
 				if (e.data.event === "change") {
 					this.list = e.data.list
-					this.activeNames = e.data.list.map((item) => item[this.labelKey[this.label]])
+					// this.activeNames = e.data.list.map((item) => item[this.labelKey[this.label]])
 				}
 			})
 			let width = this.$refs.selectRef.$el.offsetWidth
