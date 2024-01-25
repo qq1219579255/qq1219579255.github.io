@@ -101,7 +101,7 @@
 				let str
 				this.label === '1' && (str = `#${ this.$refs.selectRef.query }_${ data.name }#`)
 				if (this.label === '2') {
-					let prefix = data.formType === 'ImageUpload' ? '@' : ''
+					let prefix = data.name === 'ImageUpload' ? '@' : ''
 					str = `$${ prefix }${ this.$refs.selectRef.query }_${ data.title }$`
 				}
 				Add(str)
