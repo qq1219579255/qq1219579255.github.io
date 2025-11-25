@@ -1,5 +1,5 @@
 :root {
-    --color-primary: #00b5b9;
+    --color-primary: #3472FF;
     background-color: #fff;
     padding: 20px;
     height: 100%;
@@ -70,8 +70,8 @@ body {
 }
 
 .list-card:hover {
-    color: #00B5B9;
-    border: 1px solid #00B5B9;
+    color: #3472FF;
+    border: 1px solid #3472FF;
 }
 
 .el-select-dropdown li, .el-collapse-item__header span {
